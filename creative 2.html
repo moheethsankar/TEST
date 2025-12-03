@@ -1,0 +1,573 @@
+<!DOCTYPE TML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Creative Wings | The Cinematic Edge (Black & Red)</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="High-end, cinematic film and advertising production specializing in commercials, VFX, and global branded content." name="keywords">
+    <meta content="Creative Wings: Where vision meets execution. A premiere production house delivering unparalleled visual storytelling with a signature black and red aesthetic." name="description">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Inter:wght@300;400;500;700&display=swap');
+
+        /* Custom Color and Font Setup */
+        :root {
+            --color-primary: #E30000; /* Deep Cinematic Red */
+            --color-dark: #070707;    /* Deep Black Background/Text */
+            --color-secondary: #1A1A1A; /* Darker Accent/Card Background */
+            --color-light: #F0F0F0;   /* Light Gray/White Text */
+            --color-whatsapp: #25D366; /* Standard WhatsApp Green */
+        }
+        
+        /* Global Theme Overrides */
+        body {
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-light);
+        }
+        h2 {
+            text-transform: uppercase;
+        }
+
+        /* Video Background Styling */
+        #hero-video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; 
+            pointer-events: none;
+            /* Heavy filter for maximum contrast and readability */
+            filter: brightness(0.2) grayscale(0.1); 
+        }
+
+        #hero-video {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+
+        /* Hero Content Overlay */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            z-index: 10;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 1rem;
+            backdrop-filter: blur(2px);
+            border: 2px solid var(--color-primary);
+            box-shadow: 0 0 40px rgba(227, 0, 0, 0.2);
+        }
+        
+        /* Primary Button Style (Red on Black) */
+        .btn-primary-custom {
+            background-color: var(--color-primary);
+            color: var(--color-light);
+            font-weight: 800;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(227, 0, 0, 0.4);
+        }
+        .btn-primary-custom:hover {
+            background-color: #AA0000; 
+            box-shadow: 0 8px 25px rgba(227, 0, 0, 0.7);
+            transform: translateY(-3px);
+        }
+
+        /* Secondary Button Style (Transparent with Red Border) */
+        .btn-secondary-custom {
+            background-color: transparent;
+            color: var(--color-light);
+            border: 2px solid var(--color-light);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary-custom:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background-color: var(--color-secondary);
+        }
+
+        /* Service Cards & Hover Effects */
+        .service-card {
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid var(--color-secondary);
+            border-radius: 0.75rem; /* rounded-xl */
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--color-primary);
+            box-shadow: 0 15px 40px rgba(227, 0, 0, 0.5);
+        }
+
+        /* Utility classes */
+        .text-primary-custom {
+            color: var(--color-primary);
+        }
+        .text-dark-custom {
+            color: var(--color-dark); 
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: var(--color-whatsapp);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .whatsapp-float:hover {
+            background-color: #128C7E;
+            box-shadow: 0 0 15px var(--color-whatsapp);
+            transform: scale(1.05);
+        }
+
+        /* Team Card Styling */
+        .team-card {
+            background-color: var(--color-secondary);
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(227, 0, 0, 0.4);
+        }
+        .team-socials {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .team-card:hover .team-socials {
+            opacity: 1;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMD/CDQd/5d/Pz/s31rC/iE/k0K1y7B+e7l8I/C0H9A/C6A6yY5+8s/E3fGk5+rI5+g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+</head>
+
+<body class="antialiased">
+    <div id="spinner" class="fixed inset-0 z-50 flex items-center justify-center bg-dark transition-opacity duration-500 opacity-100">
+        <div class="animate-spin w-16 h-16 border-t-4 border-b-4 border-primary-custom rounded-full" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <nav class="sticky top-0 z-40 w-full bg-dark/95 backdrop-blur-sm shadow-2xl shadow-black/80">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <a href="#home" class="flex-shrink-0">
+                    <h1 class="text-xl md:text-3xl font-extrabold text-light uppercase flex items-center tracking-widest">
+                        <i class="fas fa-camera-movie mr-3 text-primary-custom text-3xl"></i>Creative <span class="text-primary-custom ml-1">Wings</span>
+                    </h1>
+                </a>
+                <div class="hidden lg:flex lg:items-center space-x-8">
+                    <a href="#home" class="text-light hover:text-primary-custom transition duration-300 font-semibold tracking-wider">HOME</a>
+                    <a href="#about" class="text-light hover:text-primary-custom transition duration-300 font-semibold tracking-wider">ABOUT</a>
+                    <a href="#services" class="text-light hover:text-primary-custom transition duration-300 font-semibold tracking-wider">SERVICES</a>
+                    <a href="#portfolio" class="text-light hover:text-primary-custom transition duration-300 font-semibold tracking-wider">PORTFOLIO</a>
+                    <a href="#team" class="text-light hover:text-primary-custom transition duration-300 font-semibold tracking-wider">TEAM</a>
+                    <a href="#contact" class="btn-primary-custom font-semibold py-2 px-5 rounded-full transition duration-300 flex items-center uppercase text-sm">
+                        Start Project <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <button id="navbar-toggler" type="button" class="lg:hidden text-primary-custom hover:text-light focus:outline-none rounded-md p-2">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="navbar-collapse" class="hidden lg:hidden bg-dark/95 pb-4 border-t border-primary-custom/20">
+            <a href="#home" class="block px-4 py-2 text-light hover:bg-secondary hover:text-primary-custom font-medium border-b border-secondary">HOME</a>
+            <a href="#about" class="block px-4 py-2 text-light hover:bg-secondary hover:text-primary-custom font-medium border-b border-secondary">ABOUT</a>
+            <a href="#services" class="block px-4 py-2 text-light hover:bg-secondary hover:text-primary-custom font-medium border-b border-secondary">SERVICES</a>
+            <a href="#portfolio" class="block px-4 py-2 text-light hover:bg-secondary hover:text-primary-custom font-medium border-b border-secondary">PORTFOLIO</a>
+            <a href="#team" class="block px-4 py-2 text-light hover:bg-secondary hover:text-primary-custom font-medium border-b border-secondary">TEAM</a>
+            <a href="#contact" class="block mx-4 my-3 text-center btn-primary-custom font-semibold py-3 rounded-full uppercase transition duration-300">
+                START PROJECT
+            </a>
+        </div>
+    </nav>
+    <section id="home" class="hero-section">
+        <div id="hero-video-container">
+            <video autoplay muted loop id="hero-video">
+                <source src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-camera-and-hand-movement-4467-large.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="container mx-auto max-w-5xl hero-content animate-fadeIn">
+            <h1 class="text-4xl sm:text-7xl md:text-8xl text-light uppercase mb-6 font-black leading-tight drop-shadow-lg">
+                <span class="text-primary-custom">VISION</span> MEETS EXECUTION
+            </h1>
+            <p class="text-lg md:text-xl text-light/80 mb-10 max-w-3xl mx-auto font-medium">
+                We are Creative Wings—a leading production house specializing in breathtaking visuals, high-impact commercials, and next-generation branded content.
+            </p>
+            
+            <a href="#contact" class="btn-primary-custom text-xl py-4 px-10 rounded-full inline-block mr-4 mb-4 sm:mb-0 uppercase tracking-widest">
+                INQUIRE NOW
+            </a>
+            <a href="#portfolio" class="btn-secondary-custom text-xl py-4 px-10 rounded-full inline-block uppercase tracking-widest">
+                VIEW REEL
+            </a>
+        </div>
+    </section>
+    <section id="about" class="container mx-auto px-4 py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div class="relative">
+                <img class="w-full h-auto rounded-xl shadow-2xl shadow-black/80 border-4 border-primary-custom/50 transform hover:scale-[1.01] transition duration-500" 
+                     src="https://placehold.co/600x400/151515/E30000?text=State-of-the-Art+Studio" 
+                     alt="Creative Wings Professional Studio">
+                <div class="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-1/4 lg:-translate-y-1/4 w-3/4 md:w-2/5 bg-secondary p-6 rounded-xl shadow-2xl shadow-black/90 border-4 border-primary-custom text-center">
+                    <h1 class="text-5xl md:text-6xl text-primary-custom uppercase font-black mb-1">20+</h1>
+                    <h2 class="text-lg md:text-xl text-light uppercase font-bold">Years of Cinematic <span class="text-primary-custom">Craft</span></h2>
+                </div>
+            </div>
+            <div class="pt-12 lg:pt-0">
+                <p class="text-primary-custom font-bold mb-3 tracking-widest text-sm uppercase">THE CINEMATIC EDGE</p>
+                <h2 class="text-3xl md:text-5xl text-light font-black mb-6">Redefining Production Standards</h2>
+                <p class="text-light/80 mb-6 text-lg">
+                    We combine world-class directorial talent with cutting-edge technology. From conceptualization to final delivery, we manage every facet of production, ensuring a seamless workflow and a spectacular outcome. Our work is driven by a passion for storytelling that captivates and converts.
+                </p>
+                <ul class="space-y-4 pt-4">
+                    <li class="flex items-start text-light text-base"><i class="fa fa-check-circle text-primary-custom text-xl mt-1 mr-3 flex-shrink-0"></i>Integrated VFX and Post-Production Pipeline</li>
+                    <li class="flex items-start text-light text-base"><i class="fa fa-check-circle text-primary-custom text-xl mt-1 mr-3 flex-shrink-0"></i>Global Network of Directors and Cinematographers</li>
+                    <li class="flex items-start text-light text-base"><i class="fa fa-check-circle text-primary-custom text-xl mt-1 mr-3 flex-shrink-0"></i>Data-Driven Strategy for Maximum Brand Impact</li>
+                </ul>
+                <a class="btn-secondary-custom py-3 px-6 mt-10 rounded-full inline-block uppercase tracking-widest" href="#team">Meet the Architects</a>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="bg-secondary/50 py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mx-auto mb-16 max-w-4xl">
+                <p class="text-primary-custom font-bold mb-3 tracking-widest text-sm uppercase">OUR CAPABILITIES</p>
+                <h2 class="text-4xl md:text-6xl text-light font-black">WHAT WE DELIVER</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="service-card bg-secondary p-8 shadow-2xl shadow-black/50 hover:shadow-primary-custom/40">
+                    <i class="fas fa-ad text-primary-custom text-5xl mb-6 block transform rotate-6"></i>
+                    <h3 class="text-xl text-light uppercase font-bold mb-2">Commercial Production</h3>
+                    <p class="text-light/70 text-sm">Concept-to-completion service for high-ROI, network-ready television and digital spots.</p>
+                </div>
+                <div class="service-card bg-secondary p-8 shadow-2xl shadow-black/50 hover:shadow-primary-custom/40">
+                    <i class="fas fa-film text-primary-custom text-5xl mb-6 block"></i>
+                    <h3 class="text-xl text-light uppercase font-bold mb-2">Feature Film & Series</h3>
+                    <p class="text-light/70 text-sm">End-to-end support for narrative projects, securing locations, talent, and distribution strategy.</p>
+                </div>
+                <div class="service-card bg-secondary p-8 shadow-2xl shadow-black/50 hover:shadow-primary-custom/40">
+                    <i class="fas fa-ghost text-primary-custom text-5xl mb-6 block transform -rotate-3"></i>
+                    <h3 class="text-xl text-light uppercase font-bold mb-2">VFX & Motion Graphics</h3>
+                    <p class="text-light/70 text-sm">Creating stunning visual effects, 3D environments, and dynamic motion graphics that defy reality.</p>
+                </div>
+                <div class="service-card bg-secondary p-8 shadow-2xl shadow-black/50 hover:shadow-primary-custom/40">
+                    <i class="fas fa-palette text-primary-custom text-5xl mb-6 block"></i>
+                    <h3 class="text-xl text-light uppercase font-bold mb-2">Color Grading & Finish</h3>
+                    <p class="text-light/70 text-sm">Mastering the final look and feel with high-definition color correction and professional mastering for all formats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="portfolio" class="container mx-auto px-4 py-24">
+        <div class="text-center mx-auto mb-16 max-w-4xl">
+            <p class="text-primary-custom font-bold mb-3 tracking-widest text-sm uppercase">SIGNATURE WORKS</p>
+            <h2 class="text-4xl md:text-6xl text-light font-black">OUR SHOW REEL</h2>
+            <p class="text-light/80 mt-4 text-lg">Experience the depth and quality of our visual language. This reel represents our creative peak.</p>
+        </div>
+        
+        <div class="max-w-6xl mx-auto mb-12 rounded-xl overflow-hidden shadow-2xl shadow-primary-custom/40 border-8 border-primary-custom/50">
+            <div class="relative" style="padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe 
+                    class="absolute top-0 left-0 w-full h-full" 
+                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=0&controls=1&modestbranding=1&rel=0" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen
+                    title="Creative Wings Show Reel">
+                </iframe>
+            </div>
+        </div>
+    </section>
+    <section id="team" class="bg-secondary/50 py-24">
+        <div class="container mx-auto px-4">
+            <div class="text-center mx-auto mb-16 max-w-4xl">
+                <p class="text-primary-custom font-bold mb-3 tracking-widest text-sm uppercase">THE VISIONARIES</p>
+                <h2 class="text-4xl md:text-6xl text-light font-black">MEET THE CORE TEAM</h2>
+                <p class="text-light/80 mt-4 text-lg">Our award-winning team brings decades of combined experience in cinematic storytelling and production mastery.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="team-card text-center">
+                    <div class="relative">
+                        <img class="w-full h-80 object-cover" src="https://placehold.co/400x400/1A1A1A/E30000?text=Director+Photo" alt="Team Member 1">
+                        <div class="team-socials">
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl text-primary-custom uppercase font-bold mb-1">Elias Vance</h3>
+                        <p class="text-light/70 text-sm">Founder & Lead Director</p>
+                    </div>
+                </div>
+
+                <div class="team-card text-center">
+                    <div class="relative">
+                        <img class="w-full h-80 object-cover" src="https://placehold.co/400x400/1A1A1A/E30000?text=Producer+Photo" alt="Team Member 2">
+                        <div class="team-socials">
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl text-primary-custom uppercase font-bold mb-1">Zara Khan</h3>
+                        <p class="text-light/70 text-sm">Executive Producer</p>
+                    </div>
+                </div>
+
+                <div class="team-card text-center">
+                    <div class="relative">
+                        <img class="w-full h-80 object-cover" src="https://placehold.co/400x400/1A1A1A/E30000?text=VFX+Lead+Photo" alt="Team Member 3">
+                        <div class="team-socials">
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl text-primary-custom uppercase font-bold mb-1">Marcus Lee</h3>
+                        <p class="text-light/70 text-sm">VFX Supervisor</p>
+                    </div>
+                </div>
+
+                <div class="team-card text-center">
+                    <div class="relative">
+                        <img class="w-full h-80 object-cover" src="https://placehold.co/400x400/1A1A1A/E30000?text=DOP+Photo" alt="Team Member 4">
+                        <div class="team-socials">
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a class="text-light hover:text-primary-custom mx-3 transition duration-300 text-2xl" href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl text-primary-custom uppercase font-bold mb-1">Anya Petrova</h3>
+                        <p class="text-light/70 text-sm">Lead Cinematographer</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <section class="bg-primary-custom py-16 shadow-inner shadow-black/80">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl text-dark font-black mb-4 uppercase">READY TO CREATE THE NEXT VIRAL SUCCESS?</h2>
+            <p class="text-dark font-semibold text-lg mb-8 ">Let's discuss your visionary project and how we can bring it to life.</p>
+            <a href="#contact" class="bg-dark text-primary-custom hover:bg-black py-4 px-10 rounded-full text-xl font-bold uppercase tracking-widest transition duration-300 shadow-2xl shadow-dark/50 inline-block">
+                REQUEST A BID
+            </a>
+        </div>
+    </section>
+    
+    <section id="contact" class="bg-dark py-24">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-3 rounded-xl overflow-hidden shadow-2xl shadow-primary-custom/40 border-4 border-primary-custom/50">
+                
+                <div class="bg-secondary p-8 md:p-12 lg:col-span-1 border-r-4 border-primary-custom">
+                    <h3 class="text-3xl text-primary-custom uppercase font-black mb-8 border-b pb-4 border-primary-custom/50">DIRECT CONTACT</h3>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <i class="fas fa-envelope text-primary-custom text-2xl mr-4 mt-1"></i>
+                            <div>
+                                <p class="text-light/70 uppercase text-xs font-bold">Email Inquiry</p>
+                                <a href="mailto:inquire@creativewings.com" class="text-light hover:text-primary-custom transition duration-300 text-lg font-medium">inquire@creativewings.com</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fab fa-whatsapp text-primary-custom text-2xl mr-4 mt-1"></i>
+                            <div>
+                                <p class="text-light/70 uppercase text-xs font-bold">WhatsApp Chat</p>
+                                <a href="https://wa.me/15551234567?text=Hello%20Creative%20Wings%2C%20I%20have%20a%20project%20inquiry." target="_blank" class="text-light hover:text-primary-custom transition duration-300 text-lg font-medium">+1 555 123 4567</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <i class="fas fa-phone-alt text-primary-custom text-2xl mr-4 mt-1"></i>
+                            <div>
+                                <p class="text-light/70 uppercase text-xs font-bold">Call/Text</p>
+                                <a href="tel:+15551234567" class="text-light hover:text-primary-custom transition duration-300 text-lg font-medium">+1 555 123 4567</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary-custom text-2xl mr-4 mt-1"></i>
+                            <div>
+                                <p class="text-light/70 uppercase text-xs font-bold">Global HQ</p>
+                                <p class="text-light text-lg font-medium">123 Cinematic Ave, Los Angeles, CA 90027</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-dark p-8 md:p-12 lg:col-span-2">
+                    <h2 class="text-3xl md:text-4xl text-light uppercase font-black mb-8">Tell Us About Your Vision</h2>
+
+                    <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            <input id="contactName" type="text" class="w-full p-4 rounded-lg bg-light border border-secondary text-dark-custom placeholder-gray-700 focus:border-primary-custom focus:ring-primary-custom/50 transition" placeholder="Your Name / Company" required>
+                            <input id="contactEmail" type="email" class="w-full p-4 rounded-lg bg-light border border-secondary text-dark-custom placeholder-gray-700 focus:border-primary-custom focus:ring-primary-custom/50 transition" placeholder="Your Email" required>
+                        </div>
+                        <div class="mb-6">
+                            <input id="contactSubject" type="text" class="w-full p-4 rounded-lg bg-light border border-secondary text-dark-custom placeholder-gray-700 focus:border-primary-custom focus:ring-primary-custom/50 transition" placeholder="Project Type (e.g., Car Commercial, Music Video, Branded Short)" required>
+                        </div>
+                        <div class="mb-6">
+                            <textarea id="contactMessage" rows="6" class="w-full p-4 rounded-lg bg-light border border-secondary text-dark-custom placeholder-gray-700 focus:border-primary-custom focus:ring-primary-custom/50 transition" placeholder="Briefly outline your project, desired deliverables, and estimated budget/timeline." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full btn-primary-custom text-lg py-4 rounded-full uppercase tracking-widest">
+                            SUBMIT BID REQUEST
+                        </button>
+                    </form>
+
+                    <div id="formFeedback" class="mt-6 p-4 rounded-lg text-center hidden"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <a href="https://wa.me/15551234567?text=Hello%20Creative%20Wings%2C%20I%20have%20a%20project%20inquiry." target="_blank" class="whatsapp-float" title="Chat with us on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+
+    <footer class="bg-black text-light pt-10 pb-6 border-t-8 border-primary-custom shadow-inner shadow-primary-custom/20">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-6 mb-6">
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://facebook.com/CreativeWingsAgency" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://twitter.com/CreativeWingsAgency" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://linkedin.com/company/CreativeWingsAgency" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://instagram.com/CreativeWingsOfficial" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://youtube.com/CreativeWingsChannel" target="_blank"><i class="fab fa-youtube"></i></a>
+                <a class="text-light hover:text-primary-custom transition duration-300 text-xl" href="https://wa.me/15551234567" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            </div>
+
+            <div class="text-center text-sm text-light/50 border-t border-secondary pt-6">
+                &copy; <span id="currentYear"></span> Creative Wings. All Rights Reserved. | <a class="text-primary-custom hover:underline" href="#">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // 1. Loading Spinner Logic
+        window.addEventListener('load', () => {
+            const spinner = document.getElementById('spinner');
+            if (spinner) {
+                spinner.style.opacity = '0';
+                setTimeout(() => {
+                    spinner.classList.add('hidden');
+                }, 500);
+            }
+        });
+
+        // 2. Mobile Navbar Toggle
+        document.getElementById('navbar-toggler').addEventListener('click', () => {
+            const collapse = document.getElementById('navbar-collapse');
+            collapse.classList.toggle('hidden');
+        });
+        
+        // Hide mobile menu when clicking a link
+        document.querySelectorAll('#navbar-collapse a').forEach(item => {
+            item.addEventListener('click', () => {
+                document.getElementById('navbar-collapse').classList.add('hidden');
+            });
+        });
+
+        // 3. Handle Contact Form Submission (Mail API Placeholder)
+        /**
+         * NOTE: This function simulates a server-side request that handles Mail API 
+         * and Database connection logic. In a pure HTML file, we use the mailto: 
+         * protocol as a fallback, which is demonstrated here.
+         * * To implement a true server-side Mail API (like SendGrid) and 
+         * Database (like MongoDB/SQL), the code below would be replaced with an 
+         * asynchronous 'fetch' call to a backend endpoint.
+         */
+        function handleContactSubmit(event) {
+            event.preventDefault(); 
+            
+            const name = document.getElementById('contactName').value;
+            const email = document.getElementById('contactEmail').value;
+            const subject = document.getElementById('contactSubject').value;
+            const message = document.getElementById('contactMessage').value;
+            const feedback = document.getElementById('formFeedback');
+
+            if (!name || !email || !subject || !message) {
+                 feedback.className = 'mt-6 p-4 rounded-lg text-center bg-red-800 text-white shadow-xl';
+                 feedback.textContent = 'Please fill out all required fields to submit your bid request.';
+                 feedback.classList.remove('hidden');
+                 return;
+            }
+
+            // Construct the final subject line
+            const finalSubject = `BID REQUEST: ${subject} | from ${name}`;
+
+            // Construct the email body with URL-encoded content for mailto
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AProject Type: ${subject}%0D%0A%0D%0AProject Scope:%0D%0A${encodeURIComponent(message)}`;
+            const mailtoLink = `mailto:inquire@creativewings.com?subject=${encodeURIComponent(finalSubject)}&body=${body}`;
+
+            // Provide feedback and launch the mail client
+            feedback.className = 'mt-6 p-4 rounded-lg text-center bg-primary-custom text-dark font-bold shadow-xl';
+            feedback.textContent = 'Success! Your email client is launching now with your pre-filled inquiry. We look forward to reviewing your project.';
+            feedback.classList.remove('hidden');
+            
+            window.location.href = mailtoLink;
+
+            // Reset the form after a delay
+            setTimeout(() => {
+                document.getElementById('contactForm').reset();
+                feedback.classList.add('hidden');
+            }, 8000);
+        }
+    </script>
+</body>
+
+</html>
